@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <ImageView
+        android:id="@+id/ivUserProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_twitter" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/ivUserProfileImage"
+        android:ellipsize="end"
+        android:text="Name"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvUserTagLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_toRightOf="@+id/ivUserProfileImage"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_marginLeft="15dp"
+        android:textColor="#B5B5B5"
+        android:text="\@screen_name" />
+
+    <TextView
+        android:id="@+id/tvFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivUserProfileImage"
+        android:layout_alignLeft="@+id/ivUserProfileImage"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <TextView
+        android:id="@+id/tvFollowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivUserProfileImage"
+        android:layout_toRightOf="@+id/tvFollowers"
+        android:layout_alignTop="@+id/tvFollowers"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <fragment
+        android:id="@+id/fragmentUserTimeline"
+        android:name="com.yahoo.bshivani.basictwitter.fragment.UserTimeLineFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvFollowers"
+        android:layout_marginTop="20dp"
+        tools:layout="@layout/fragment_tweet_list" />
+
+</RelativeLayout>
