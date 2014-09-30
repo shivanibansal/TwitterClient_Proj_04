@@ -1,8 +1,5 @@
 package com.yahoo.bshivani.basictwitter;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 

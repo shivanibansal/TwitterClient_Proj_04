@@ -23,11 +23,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 import com.yahoo.bshivani.basictwitter.R;
 import com.yahoo.bshivani.basictwitter.TwitterClient;
-import com.yahoo.bshivani.basictwitter.R.id;
-import com.yahoo.bshivani.basictwitter.R.layout;
-import com.yahoo.bshivani.basictwitter.R.menu;
 import com.yahoo.bshivani.basictwitter.models.Tweet;
-
 
 public class ComposeActivity extends Activity {
 	public EditText 	etEnterNewTweet;

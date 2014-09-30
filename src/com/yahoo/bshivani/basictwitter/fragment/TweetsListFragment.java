@@ -9,14 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.yahoo.bshivani.basictwitter.ProfileActivity;
 import com.yahoo.bshivani.basictwitter.R;
 import com.yahoo.bshivani.basictwitter.TwitterClient;
-import com.yahoo.bshivani.basictwitter.activity.TimelineActivity;
 import com.yahoo.bshivani.basictwitter.activity.TwitterApplication;
 import com.yahoo.bshivani.basictwitter.adapters.TweetAdapter;
 import com.yahoo.bshivani.basictwitter.models.Tweet;
