@@ -104,9 +104,11 @@ public class TimelineActivity extends FragmentActivity {
 
 	public void onClickUserProfile(MenuItem mi) {
 		
-		TwitterApplication.getRestClient().setUserId(0);
+//		TwitterApplication.getRestClient().setUserId(0);
+		TwitterApplication.getRestClient().setUserScreenNameToLookup("");
 		Intent i = new Intent(this, ProfileActivity.class);
-		i.putExtra("UserId", 0); // Self Profile
+//		i.putExtra("UserId", 0); // Self Profile
+		i.putExtra("UserScreenName", ""); // Self Profile
 		startActivity(i);
 	}
 	@Override

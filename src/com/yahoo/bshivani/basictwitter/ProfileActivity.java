@@ -20,7 +20,8 @@ public class ProfileActivity extends FragmentActivity {
 	private	TextView	tvUserTagLine;
 	private	TextView 	tvFollowers;
 	private	TextView 	tvFollowing;
-	private static long		userId = 0; // 0 means self
+//	private static long		userId = 0; // 0 means self
+	private static String   userScreenName = ""; // 0 means self
 	
 
 
@@ -33,19 +34,27 @@ public class ProfileActivity extends FragmentActivity {
 		tvUserTagLine = (TextView)findViewById(R.id.tvUserTagLine);
 		tvFollowers = (TextView)findViewById(R.id.tvFollowers);
 		tvFollowing = (TextView)findViewById(R.id.tvFollowing);
-		userId = 0;
-		userId = getIntent().getLongExtra("UserId", 0);
+//		userId = 0;
+//		userId = getIntent().getLongExtra("UserId", 0);
+		userScreenName = "";
+		userScreenName = getIntent().getStringExtra("UserScreenName");
 		setUserData();
 	}
 	
-	public static long getUserId (){
-		return userId;
+//	public static long getUserId (){
+//		return userId;
+//	}
+	
+	public static String getUserScreenName (){
+		return userScreenName;
 	}
 	
 	public void setUserData() { 
 	TwitterClient 	client = TwitterApplication.getRestClient();
 //	client.setUserId(userId);
-	if (userId == 0) {
+//	if (userId == 0) {
+//	if (userScreenName == "") {
+	if (userScreenName.equalsIgnoreCase("") == true) {
 		client.getAccountDetails(new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject json) {

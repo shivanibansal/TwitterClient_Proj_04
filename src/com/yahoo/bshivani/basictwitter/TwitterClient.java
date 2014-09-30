@@ -42,8 +42,10 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final String 	TWITTER_USER_TIMELINE = "/statuses/user_timeline.json";
 	public static final String 	TWITTER_MENTION_TIMELINE = "/statuses/mentions_timeline.json";
 	public static final String  TWITTER_USER_LOOKUP = "users/lookup.json";
-	public static final String 	TWITTER_USER_ID = "?user_id=";
-	public static long userIdToLookup = 0;
+//	public static final String 	TWITTER_USER_ID = "?user_id=";
+//	public static long userIdToLookup = 0;
+	public static final String 	TWITTER_USER_SCREEN_NAME = "?screen_name=";
+	public static String userScreenNameToLookup = "";
 	
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
@@ -74,8 +76,11 @@ public class TwitterClient extends OAuthBaseClient {
 		} else {
 			strApi = TWITTER_USER_TIMELINE + TWITTER_TIMELINE_COUNT_PARAM + MAX_NUM_OF_USER_TWEETS + "&" + TWITTER_TIMELINE_MAX_ID_PARAM + (user_timeline_max_id-1L);
 		}
-		if (userIdToLookup != 0) {
-			strApi = strApi + "&user_id=" + userIdToLookup;
+//		if (userIdToLookup != 0) {
+//			strApi = strApi + "&user_id=" + userIdToLookup;
+		if (userScreenNameToLookup != "") {
+			strApi = strApi + "&screen_name=" + userScreenNameToLookup;
+		
 		}
 		apiURL = getApiUrl(strApi);
 		RequestParams params = new RequestParams();
@@ -96,20 +101,33 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiURL, null, handler);
 	}
 
-	public void setUserId(long uid) {
-		if (uid != 0)
-			userIdToLookup = uid;
+	
+	public void setUserScreenNameToLookup(String uScreenName) {
+		
+		if (uScreenName != "")
+		{
+			if (uScreenName.charAt(0) == '@')
+				uScreenName = uScreenName.substring(1, uScreenName.length());
+			userScreenNameToLookup = uScreenName;
+		}
 		else
-			userIdToLookup = 0;
+			userScreenNameToLookup = "";
 	}
+
+//	public void setUserId(long uid) {
+//		if (uid != 0)
+//			userIdToLookup = uid;
+//		else
+//			userIdToLookup = 0;
+//	}
 	
 	public void getUserLookup(AsyncHttpResponseHandler handler) {
 		String apiURL ;
-		if (userIdToLookup == 0) { 
+		if (userScreenNameToLookup == "") { 
 			apiURL = getApiUrl(TWITTER_USER_LOOKUP);
 		} else {
 //			apiURL = getApiUrl(TWITTER_USER_LOOKUP + TWITTER_USER_ID + userIdToLookup + "&screen_name=%22%22");
-			apiURL = getApiUrl(TWITTER_USER_LOOKUP + TWITTER_USER_ID + userIdToLookup );
+			apiURL = getApiUrl(TWITTER_USER_LOOKUP + TWITTER_USER_SCREEN_NAME + userScreenNameToLookup);
 		}
 		client.get(apiURL, null, handler);
 //		userIdToLookup = 0;

@@ -37,28 +37,38 @@ public class TweetsListFragment extends Fragment {
 		lvTweets = (ListView) v.findViewById(R.id.lvTweets);
 		lvTweets.setAdapter(aTweets);
 
-		
-//		setActionBar();
-//		populateTimeline();
-//		// return the layout view
 		lvTweets.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
 //				if (getActivity().getClass().getSimpleName() == "TimelineActivity")
 				{
-					Toast.makeText(getActivity(), "Clicked - " + getActivity().getClass().getSimpleName() + "- " + position, Toast.LENGTH_SHORT).show();
-					Tweet twt = tweets.get(position);
-					
-					Intent i = new Intent(getActivity(), ProfileActivity.class);
-					i.putExtra("UserId", twt.getUser().getUid()); // User Profile
-					TwitterApplication.getRestClient().setUserId(twt.getUser().getUid());
-					startActivity(i);
+					Toast.makeText(getActivity(), "Click User profile Image infront of tweet to check user details ", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
+//		setActionBar();
+//		populateTimeline();
+//		// return the layout view
+//		lvTweets.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				// TODO Auto-generated method stub
+////				if (getActivity().getClass().getSimpleName() == "TimelineActivity")
+//				{
+//					Toast.makeText(getActivity(), "Clicked - " + getActivity().getClass().getSimpleName() + "- " + position, Toast.LENGTH_SHORT).show();
+//					Tweet twt = tweets.get(position);
+//					
+//					Intent i = new Intent(getActivity(), ProfileActivity.class);
+//					i.putExtra("UserId", twt.getUser().getUid()); // User Profile
+//					TwitterApplication.getRestClient().setUserId(twt.getUser().getUid());
+//					startActivity(i);
+//				}
+//			}
+//		});
 		return v;
 	}
 	

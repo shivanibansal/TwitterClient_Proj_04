@@ -3,17 +3,25 @@ package com.yahoo.bshivani.basictwitter.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
+import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.yahoo.bshivani.basictwitter.ProfileActivity;
 import com.yahoo.bshivani.basictwitter.R;
-import com.yahoo.bshivani.basictwitter.models.Tweet;
-import com.yahoo.bshivani.basictwitter.utils.UtilsClass;
+import com.yahoo.bshivani.basictwitter.activity.TwitterApplication;
+import com.yahoo.bshivani.basictwitter.models.*;
+import com.yahoo.bshivani.basictwitter.utils.*;
 
 public class TweetAdapter extends ArrayAdapter<Tweet> {
 
@@ -44,7 +52,43 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 //		String strTimeStamp = tweet.getCreatedAt();
 		String strTimeStamp = UtilsClass.getRelativeTime(tweet.getCreatedAt());
 		tvTimeStamp.setText(strTimeStamp);
+		ivProfileImage.setTag(tvTweetScreenName.getText().toString());
 		
+		ivProfileImage.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				Toast.makeText(getContext(), "Clicked Here ", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getContext(), ProfileActivity.class);
+
+				// FIND USER ID
+//				String uScreenName = v.findViewById(R.id.tvScreenName).toString();
+				String uScreenName = (String)v.getTag();
+				i.putExtra("UserScreenName", uScreenName); // User Profile
+//				i.putExtra("UserId", 0); // User Profile
+//				TwitterApplication.getRestClient().setUserId(0);
+				TwitterApplication.getRestClient().setUserScreenNameToLookup(uScreenName);
+				getContext().startActivity(i);	
+			}
+		});
+		
+//		lvTweets.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				// TODO Auto-generated method stub
+////				if (getActivity().getClass().getSimpleName() == "TimelineActivity")
+//				{
+//					Toast.makeText(getActivity(), "Clicked - " + getActivity().getClass().getSimpleName() + "- " + position, Toast.LENGTH_SHORT).show();
+//					Tweet twt = tweets.get(position);
+//					
+//					Intent i = new Intent(getActivity(), ProfileActivity.class);
+//					i.putExtra("UserId", twt.getUser().getUid()); // User Profile
+//					TwitterApplication.getRestClient().setUserId(twt.getUser().getUid());
+//					startActivity(i);
+//				}
+//			}
+//		});
 		
 		return convertView;
 	}
