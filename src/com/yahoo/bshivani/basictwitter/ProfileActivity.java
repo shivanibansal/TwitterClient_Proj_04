@@ -1,5 +1,6 @@
 package com.yahoo.bshivani.basictwitter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +44,7 @@ public class ProfileActivity extends FragmentActivity {
 	
 	public void setUserData() { 
 	TwitterClient 	client = TwitterApplication.getRestClient();
-	client.setUserId(userId);
+//	client.setUserId(userId);
 	if (userId == 0) {
 		client.getAccountDetails(new JsonHttpResponseHandler() {
 			@Override
@@ -90,10 +91,43 @@ public class ProfileActivity extends FragmentActivity {
 	else { // For a particular User
 		client.getUserLookup(new JsonHttpResponseHandler() {
 			@Override
-			public void onSuccess(JSONObject json) {
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+				super.onFailure(arg0);
+			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
+			
+			@Override
+			public void onSuccess(int arg0, JSONArray arg1) {
+				// TODO Auto-generated method stub
+				super.onSuccess(arg0, arg1);
+			}
+			
+//			@Override
+//			public void onSuccess(JSONArray arg0) {
+//				// TODO Auto-generated method stub
+//				Log.d("debug", arg0.toString());
+//				super.onSuccess(arg0);
+//			}
+			@Override
+			public void onSuccess(String arg0) {
+				// TODO Auto-generated method stub
+				super.onSuccess(arg0);
+			}
+			@Override
+//			public void onSuccess(JSONObject json) {
+			public void onSuccess(JSONArray arg0) {
 				String userProfileImageUrl = "";
-				Log.d("debug", json.toString());
+				JSONObject json;
 				try {
+					json = arg0.getJSONObject(0);
+					Log.d("debug", json.toString());
+
 					String userName = json.getString("name");
 					String userScreenName = json.getString("screen_name");
 					String userTagLine = json.getString("description");

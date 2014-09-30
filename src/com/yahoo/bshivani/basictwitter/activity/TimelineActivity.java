@@ -103,6 +103,8 @@ public class TimelineActivity extends FragmentActivity {
 	}
 
 	public void onClickUserProfile(MenuItem mi) {
+		
+		TwitterApplication.getRestClient().setUserId(0);
 		Intent i = new Intent(this, ProfileActivity.class);
 		i.putExtra("UserId", 0); // Self Profile
 		startActivity(i);

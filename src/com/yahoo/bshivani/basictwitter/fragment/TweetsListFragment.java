@@ -55,8 +55,8 @@ public class TweetsListFragment extends Fragment {
 					
 					Intent i = new Intent(getActivity(), ProfileActivity.class);
 					i.putExtra("UserId", twt.getUser().getUid()); // User Profile
+					TwitterApplication.getRestClient().setUserId(twt.getUser().getUid());
 					startActivity(i);
-//					t.getUid()
 				}
 			}
 		});

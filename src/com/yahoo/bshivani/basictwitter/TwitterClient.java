@@ -111,7 +111,8 @@ public class TwitterClient extends OAuthBaseClient {
 		if (userIdToLookup == 0) { 
 			apiURL = getApiUrl(TWITTER_USER_LOOKUP);
 		} else {
-			apiURL = getApiUrl(TWITTER_USER_LOOKUP + TWITTER_USER_ID + userIdToLookup + "&screen_name=%22%22");
+//			apiURL = getApiUrl(TWITTER_USER_LOOKUP + TWITTER_USER_ID + userIdToLookup + "&screen_name=%22%22");
+			apiURL = getApiUrl(TWITTER_USER_LOOKUP + TWITTER_USER_ID + userIdToLookup );
 		}
 		client.get(apiURL, null, handler);
 //		userIdToLookup = 0;
