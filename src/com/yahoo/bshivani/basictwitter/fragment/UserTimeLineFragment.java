@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yahoo.bshivani.basictwitter.TwitterClient;
@@ -31,7 +32,7 @@ public class UserTimeLineFragment extends TweetsListFragment {
 				System.out.println("# of Tweets : " + json.length());
 				addAll(Tweet.fromJsonArray(json));
 				notifyDataSetChanged();
-				client.setMaxId(Tweet.lowestTweetIdfromJsonArray(json));
+				client.setMaxId_UserTimeline(Tweet.lowestTweetIdfromJsonArray(json));
 			};
 
 			@Override
@@ -65,4 +66,10 @@ public class UserTimeLineFragment extends TweetsListFragment {
 		});
 	}
 
+	@Override
+	public void scorllListView(int offset) {
+		// TODO Auto-generated method stub
+		Toast.makeText(getActivity(), "Scroll on UserTimeLineFragment", Toast.LENGTH_SHORT).show();
+		populateTimeline();
+	}
 }

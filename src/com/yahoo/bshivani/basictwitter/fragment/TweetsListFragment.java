@@ -2,7 +2,6 @@ package com.yahoo.bshivani.basictwitter.fragment;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,14 +12,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.yahoo.bshivani.basictwitter.ProfileActivity;
 import com.yahoo.bshivani.basictwitter.R;
 import com.yahoo.bshivani.basictwitter.TwitterClient;
 import com.yahoo.bshivani.basictwitter.activity.TwitterApplication;
 import com.yahoo.bshivani.basictwitter.adapters.TweetAdapter;
+import com.yahoo.bshivani.basictwitter.listener.EndlessScrollListener;
 import com.yahoo.bshivani.basictwitter.models.Tweet;
 
-public class TweetsListFragment extends Fragment {
+public abstract class TweetsListFragment extends Fragment {
 	private ArrayList<Tweet> tweets;
 	private TweetAdapter aTweets;
 	//private ArrayAdapter<Tweet> aTweets;
@@ -69,9 +68,25 @@ public class TweetsListFragment extends Fragment {
 //				}
 //			}
 //		});
+		
+					
+		lvTweets.setOnScrollListener(new EndlessScrollListener() {
+
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				System.out.println("onLoadMore");
+				// Triggered only when new data needs to be appended to the list
+				// Add whatever code is needed to append new items to your AdapterView
+				// or customLoadMoreDataFromApi(totalItemsCount);
+				scorllListView(page);
+//				customLoadMoreDataFromApi(page); 
+			}
+		});
+		
 		return v;
 	}
 	
+	public abstract void scorllListView(int offset);
 	
 	
 	public void onCreate(Bundle savedInstanceState) {

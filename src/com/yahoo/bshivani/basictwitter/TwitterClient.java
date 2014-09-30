@@ -32,7 +32,7 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final	int 	MAX_NUM_OF_TWEETS = 25;
 	public static final String 	TWITTER_TIMELINE_COUNT_PARAM = "?count=";
 	public static final String 	TWITTER_TIMELINE_MAX_ID_PARAM = "max_id=";
-	public static long	max_id	= 0;
+	public static long	home_timeline_max_id	= 0;
 	public static long	mention_timeline_max_id	= 0;
 	public static final	int 	MAX_NUM_OF_MENTIONS = 20;
 	public static long	user_timeline_max_id = 0;
@@ -53,10 +53,10 @@ public class TwitterClient extends OAuthBaseClient {
 	
 	public void getHomeTimeline(AsyncHttpResponseHandler handler) {
 		String apiURL ;
-		if (max_id == 0) { 
+		if (home_timeline_max_id == 0) { 
 			apiURL = getApiUrl(TWITTER_HOME_TIMELINE_URL + TWITTER_TIMELINE_COUNT_PARAM + MAX_NUM_OF_TWEETS);
 		} else {
-			apiURL = getApiUrl(TWITTER_HOME_TIMELINE_URL + TWITTER_TIMELINE_COUNT_PARAM + MAX_NUM_OF_TWEETS + "&" + TWITTER_TIMELINE_MAX_ID_PARAM + (max_id-1L));
+			apiURL = getApiUrl(TWITTER_HOME_TIMELINE_URL + TWITTER_TIMELINE_COUNT_PARAM + MAX_NUM_OF_TWEETS + "&" + TWITTER_TIMELINE_MAX_ID_PARAM + (home_timeline_max_id-1L));
 		}
 		RequestParams params = new RequestParams();
 		params.put("since_id", "1");
@@ -140,13 +140,31 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 	
 
-	public long getMaxId() {
-		return max_id;
+	public long getMaxId_HomeTimeline() {
+		return home_timeline_max_id;
 	}
 	
-	public void setMaxId(long lowestTweetId) {
-		max_id = lowestTweetId;
+	public void setMaxId_HomeTimeline(long lowestTweetId) {
+		home_timeline_max_id = lowestTweetId;
 	}
+	
+	
+	public long getMaxId_MentionTimeline() {
+		return mention_timeline_max_id;
+	}
+	
+	public void setMaxId_MentionTimeline(long lowestTweetId) {
+		mention_timeline_max_id = lowestTweetId;
+	}
+	
+	public long getMaxId_UserTimeline() {
+		return user_timeline_max_id;
+	}
+	
+	public void setMaxId_UserTimeline(long lowestTweetId) {
+		user_timeline_max_id = lowestTweetId;
+	}
+	
 	// CHANGE THIS
 	// DEFINE METHODS for different API endpoints here
 	/*
